@@ -1,0 +1,45 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ALGORITHM	../usuarios/jwtutils.py	/^ALGORITHM = "HS256"$/;"	kind:variable	line:6
+ALLOWED_HOSTS	../testeconcrete/settings.py	/^ALLOWED_HOSTS = []$/;"	kind:variable	line:28
+AUTH_PASSWORD_VALIDATORS	../testeconcrete/settings.py	/^AUTH_PASSWORD_VALIDATORS = [$/;"	kind:variable	line:87
+BASE_DIR	../testeconcrete/settings.py	/^BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))$/;"	kind:variable	line:16
+DATABASES	../testeconcrete/settings.py	/^DATABASES = {$/;"	kind:variable	line:76
+DEBUG	../testeconcrete/settings.py	/^DEBUG = True$/;"	kind:variable	line:26
+INSTALLED_APPS	../testeconcrete/settings.py	/^INSTALLED_APPS = [$/;"	kind:variable	line:33
+LANGUAGE_CODE	../testeconcrete/settings.py	/^LANGUAGE_CODE = 'en-us'$/;"	kind:variable	line:106
+MIDDLEWARE	../testeconcrete/settings.py	/^MIDDLEWARE = [$/;"	kind:variable	line:42
+ROOT_URLCONF	../testeconcrete/settings.py	/^ROOT_URLCONF = 'testeconcrete.urls'$/;"	kind:variable	line:52
+SECRET_KEY	../testeconcrete/settings.py	/^SECRET_KEY = 'pek_1a_f6s_(2+_le#5zw3!z+yf0od1a4!-(u_rh^!(3)$e&(7'$/;"	kind:variable	line:23
+STATIC_URL	../testeconcrete/settings.py	/^STATIC_URL = '\/static\/'$/;"	kind:variable	line:120
+TEMPLATES	../testeconcrete/settings.py	/^TEMPLATES = [$/;"	kind:variable	line:54
+TIME_ZONE	../testeconcrete/settings.py	/^TIME_ZONE = 'UTC'$/;"	kind:variable	line:108
+TesteJWT	../usuarios/tests.py	/^class TesteJWT(TestCase):$/;"	kind:class	line:8
+USE_I18N	../testeconcrete/settings.py	/^USE_I18N = True$/;"	kind:variable	line:110
+USE_L10N	../testeconcrete/settings.py	/^USE_L10N = True$/;"	kind:variable	line:112
+USE_TZ	../testeconcrete/settings.py	/^USE_TZ = True$/;"	kind:variable	line:114
+UsuariosConfig	../usuarios/apps.py	/^class UsuariosConfig(AppConfig):$/;"	kind:class	line:7
+WSGI_APPLICATION	../testeconcrete/settings.py	/^WSGI_APPLICATION = 'testeconcrete.wsgi.application'$/;"	kind:variable	line:70
+__init__.py	../testeconcrete/__init__.py	1;"	kind:file	line:1
+__init__.py	../usuarios/__init__.py	1;"	kind:file	line:1
+__init__.py	../usuarios/migrations/__init__.py	1;"	kind:file	line:1
+admin.py	../usuarios/admin.py	1;"	kind:file	line:1
+application	../testeconcrete/wsgi.py	/^application = get_wsgi_application()$/;"	kind:variable	line:16
+apps.py	../usuarios/apps.py	1;"	kind:file	line:1
+codificarjwt	../usuarios/jwtutils.py	/^def codificarjwt(payload):$/;"	kind:function	line:8
+decodificarjwt	../usuarios/jwtutils.py	/^def decodificarjwt(chavejwt):$/;"	kind:function	line:12
+jwtutils.py	../usuarios/jwtutils.py	1;"	kind:file	line:1
+manage.py	../manage.py	1;"	kind:file	line:1
+models.py	../usuarios/models.py	1;"	kind:file	line:1
+name	../usuarios/apps.py	/^    name = 'usuarios'$/;"	kind:variable	line:8
+settings.py	../testeconcrete/settings.py	1;"	kind:file	line:1
+test_codificacao	../usuarios/tests.py	/^    def test_codificacao(self):$/;"	kind:member	line:11
+tests.py	../usuarios/tests.py	1;"	kind:file	line:1
+urlpatterns	../testeconcrete/urls.py	/^urlpatterns = [$/;"	kind:variable	line:19
+urls.py	../testeconcrete/urls.py	1;"	kind:file	line:1
+views.py	../usuarios/views.py	1;"	kind:file	line:1
+wsgi.py	../testeconcrete/wsgi.py	1;"	kind:file	line:1
