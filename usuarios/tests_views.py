@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 """Módulo de testes das interfaces REST da aplicação"""
 from __future__ import unicode_literals
+from datetime import timedelta
 from rest_framework.test import APITestCase
 from rest_framework import status
 from django.urls import reverse
 from django.test.client import RequestFactory
+from django.utils.timezone import now
+from django.conf import settings
+from freezegun import freeze_time
 
 
 JSON_CONTENT_TYPE = "application/json"
@@ -175,3 +179,11 @@ class ObterViewTest(APITestCase):
         request.META['HTTP_AUTHORIZATION'] = "Bearer {0}".format(token)
         response = obter(request, "corvinal")
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+        # testa obtencao de um token com hora adiantada e sessao expirada
+        with freeze_time(now() + timedelta(seconds=settings.TEMPO_SESSAO + 1)):
+            request = RequestFactory().get(reverse('obter',
+                                                   kwargs={"guid": guid}))
+            request.META['HTTP_AUTHORIZATION'] = "Bearer {0}".format(token)
+            response = obter(request, guid)
+            self.assertEqual(response.status_code, 440)
