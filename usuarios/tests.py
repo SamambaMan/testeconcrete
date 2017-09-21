@@ -10,7 +10,7 @@ from freezegun import freeze_time
 from .jwtutils import codificarjwt, decodificarjwt
 from .models import DetalhesUsuario
 from .exceptions import ErroSessaoExpirada, ErroAutenticacao,\
-                        ErroAutenticacaoNaoPossivel
+                        ErroAutenticacaoNaoPossivel, ErroNegocio
 
 
 class TesteJWT(TestCase):
@@ -74,8 +74,13 @@ class TesteUsuario(TestCase):
         self.assertTrue(novodetalhe.verificajwt(token))
 
         # Testa se dá erro caso tente inserir um usuário com e-mail idêntico
-        with self.assertRaises(IntegrityError):
+        with self.assertRaises(ErroNegocio):
             novodetalhe = DetalhesUsuario.objects.adicionarusuario(
+                self.usuario_inserir)
+
+        # testa a reinsercao de um usuario
+        with self.assertRaises(ErroNegocio):
+            DetalhesUsuario.objects.adicionarusuario(
                 self.usuario_inserir)
 
         # Testa obtenção do usuário inserido no banco

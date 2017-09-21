@@ -19,18 +19,19 @@ class DetalhesUsuarioManager(models.Manager):
         """adiciona um usuário a base já incluindo seus dados"""
         from .models import DetalhesUsuario, Telefone
 
+        if DetalhesUsuario.objects.filter(
+                user__username=dados['email']).exists():
+            raise ErroNegocio(u"E-mail já existente")
+
         novouser = User.objects.create_user(
             dados['email'],
             dados['email'],
             dados['password'])
 
-        try:
-            novouser.first_name = dados['name']
-            novouser.last_login = now()
-            novouser.clean()
-            novouser.save()
-        except IntegrityError:
-            raise ErroNegocio(u"E-mail já existente")
+        novouser.first_name = dados['name']
+        novouser.last_login = now()
+        novouser.clean()
+        novouser.save()
 
         novodetalhe = DetalhesUsuario()
         novodetalhe.user = novouser
