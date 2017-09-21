@@ -49,7 +49,7 @@ class TesteUsuario(TestCase):
 
         # Testa se o JWT gerado condiz com o email informado
         token = codificarjwt({'email': novodetalhe.user.username})
-        self.assertEquals(token, novodetalhe.jwttoken)
+        self.assertTrue(novodetalhe.verificajwt(token))
 
         # Testa se dá erro caso tente inserir um usuário com e-mail idêntico
         with self.assertRaises(IntegrityError):
@@ -68,5 +68,5 @@ class TesteUsuario(TestCase):
 
         # Salva o objeto novamente e certifica de que o jwt  e o guid não mudou
         obtido.save()
-        self.assertEqual(obtido.jwttoken, jwttoken)
+        self.assertTrue(obtido.verificajwt(token))
         self.assertEqual(obtido.guid, guid)
