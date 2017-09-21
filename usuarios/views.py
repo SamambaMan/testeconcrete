@@ -72,8 +72,6 @@ def obter(request, guid):
 
     jwttoken = jwttoken.split(' ')[1]
 
-    print jwttoken
-    print guid
     usuario = DetalhesUsuario.objects.obterporguidetoken(guid, jwttoken)
 
     Response(serializarusuario(usuario), status.HTTP_200_OK)
