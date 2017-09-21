@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 """Módulo de testes das interfaces REST da aplicação"""
 from __future__ import unicode_literals
-import json
 from rest_framework.test import APITestCase
 from rest_framework import status
 from django.urls import reverse
+from django.test.client import RequestFactory
+
 
 JSON_CONTENT_TYPE = "application/json"
 
@@ -28,7 +29,6 @@ class CadastrarViewTest(APITestCase):
         ]
     }"""
 
-
     def test_cadastro(self):
         """teste de criacao de usuarios"""
         response = self.client.post(
@@ -46,7 +46,7 @@ class CadastrarViewTest(APITestCase):
 
 
 class AutenticarViewTest(APITestCase):
-
+    """Classe de testes de autenticacao"""
     cadastrar_autenticar = """{
         "name": "Rony Wesley",
         "email": "rony@grifinoria.com.br",
@@ -92,20 +92,86 @@ class AutenticarViewTest(APITestCase):
             content_type=JSON_CONTENT_TYPE)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+        # testa a autenticação direta por usuário e senha
         response = self.client.post(
             reverse('autenticar'),
             data=self.autenticar_login,
             content_type=JSON_CONTENT_TYPE)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+        # autenticacao com senha incorreta
         response = self.client.post(
             reverse('autenticar'),
             data=self.autenticar_login_senha,
             content_type=JSON_CONTENT_TYPE)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
+        # autenticação com email incorreto
         response = self.client.post(
             reverse('autenticar'),
             data=self.autenticar_login_email,
             content_type=JSON_CONTENT_TYPE)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
+class ObterViewTest(APITestCase):
+    """Classe de testes de obtenção de usuarios"""
+
+    cadastrar_obter = """{
+        "name": "Gina Wesley",
+        "email": "gina@grifinoria.com.br",
+        "password": "basilisco",
+        "phones": [
+            {
+                "number": "987654321",
+                "ddd": "21"
+            },
+            {
+                "number": "69686766",
+                "ddd": "65"
+            }
+        ]
+    }"""
+
+    obter_login = """{
+            "email": "gina@grifinoria.com.br",
+            "password": "basilisco"
+        }
+
+    """
+
+    def test_obtencao(self):
+        """teste de obtencao"""
+        from .views import obter
+        response = self.client.post(
+            reverse('cadastro'),
+            data=self.cadastrar_obter,
+            content_type=JSON_CONTENT_TYPE)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        payload = response.data
+
+        guid = payload['id']
+        token = payload['token']
+
+        # tenta simplesmente obter, considerando o usuario ja logado
+        # no cadastro
+        # não gostei desse teste, necessário um teste não viciado
+        # usando curl ou interface remota
+        request = RequestFactory().get(reverse('obter', kwargs={"guid": guid}))
+        request.META['HTTP_AUTHORIZATION'] = "Bearer {0}".format(token)
+        response = obter(request, guid)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # testa token invalido
+        request = RequestFactory().get(reverse('obter', kwargs={"guid": guid}))
+        request.META['HTTP_AUTHORIZATION'] = "Bearer {0}".format("sonserina")
+        response = obter(request, guid)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+        # testa guid invalido
+        request = RequestFactory().get(reverse('obter',
+                                               kwargs={"guid": "corvinal"}))
+        request.META['HTTP_AUTHORIZATION'] = "Bearer {0}".format(token)
+        response = obter(request, "corvinal")
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)

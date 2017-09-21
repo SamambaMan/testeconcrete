@@ -35,6 +35,7 @@ def trataerros(metodo):
             return Response(serializaerro(erro),
                             status=409)
         except Exception as error:
+            print error
             return Response(serializaerro(
                 u"Ocorreu um erro não tratado: " + str(error)),
                             status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -75,4 +76,4 @@ def obter(request, guid):
 
     usuario = DetalhesUsuario.objects.obterporguidetoken(guid, jwttoken)
 
-    Response(serializarusuario(usuario), status.HTTP_200_OK)
+    return Response(serializarusuario(usuario), status.HTTP_200_OK)
