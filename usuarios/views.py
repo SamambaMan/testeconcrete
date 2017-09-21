@@ -74,7 +74,7 @@ def obter(request, guid):
     jwttoken = jwttoken.split(' ')[1]
 
     # compatibilizacao python 2/3
-    if type(jwttoken) == bytes:
+    if isinstance(jwttoken, bytes):
         jwttoken = jwttoken.decode('UTF-8')
 
     usuario = DetalhesUsuario.objects.obterporguidetoken(guid, jwttoken)
