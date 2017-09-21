@@ -21,7 +21,8 @@ class DetalhesUsuario(models.Model):
         """Sobrecarga do método save, para incrementar valores de token e
         guid"""
         if not self.guid:
-            self.guid = hashlib.sha1(self.user.username).hexdigest()
+            self.guid = hashlib.sha1(
+                self.user.username.encode('utf-8')).hexdigest()
 
         if not self.jwttoken:
             jwtcodificado = self.gerajwt()
