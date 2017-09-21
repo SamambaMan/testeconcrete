@@ -18,8 +18,8 @@ class ErroSessaoExpirada(Exception):
     pass
 
 
-class ErroNegocio(Exception):
-    """Erro generico de negocio"""
+class ErroRecursoExistente(Exception):
+    """Erro de adicao de recurso já existente"""
     pass
 
 

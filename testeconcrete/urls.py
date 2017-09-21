@@ -14,8 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from django.contrib import admin
+from usuarios.views import cadastro, autenticar, obter
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^cadastro/$', cadastro),
+    url(r'^autenticar/$', autenticar),
+    url(r'^obter/(?P<guid>[\w\d]+)/$', obter),
 ]
