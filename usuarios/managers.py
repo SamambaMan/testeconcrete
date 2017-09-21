@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.utils.timezone import now
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
-from .exceptions import ErroNegocio, ErroAutenticacao, ErroSessaoExpirada,\
+from .exceptions import ErroRecursoExistente, ErroAutenticacao, ErroSessaoExpirada,\
                         ErroAutenticacaoNaoPossivel, ERRO_MENSAGENS
 from .jwtutils import hashjwt
 
@@ -21,7 +21,7 @@ class DetalhesUsuarioManager(models.Manager):
 
         if DetalhesUsuario.objects.filter(
                 user__username=dados['email']).exists():
-            raise ErroNegocio(u"E-mail já existente")
+            raise ErroRecursoExistente(u"E-mail já existente")
 
         novouser = User.objects.create_user(
             dados['email'],
