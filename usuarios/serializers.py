@@ -1,5 +1,10 @@
 """Serializers utilizados nas views"""
 
+try:
+    unicode
+except:
+    unicode = str
+
 
 def serializaerro(mensagem):
     """Serializa qualquer mensagem de erro"""
