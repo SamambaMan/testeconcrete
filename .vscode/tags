@@ -4,42 +4,68 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+0001_initial.py	../usuarios/migrations/0001_initial.py	1;"	kind:file	line:1
 ALGORITHM	../usuarios/jwtutils.py	/^ALGORITHM = "HS256"$/;"	kind:variable	line:6
 ALLOWED_HOSTS	../testeconcrete/settings.py	/^ALLOWED_HOSTS = []$/;"	kind:variable	line:28
-AUTH_PASSWORD_VALIDATORS	../testeconcrete/settings.py	/^AUTH_PASSWORD_VALIDATORS = [$/;"	kind:variable	line:87
+AUTH_PASSWORD_VALIDATORS	../testeconcrete/settings.py	/^AUTH_PASSWORD_VALIDATORS = [$/;"	kind:variable	line:88
 BASE_DIR	../testeconcrete/settings.py	/^BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))$/;"	kind:variable	line:16
-DATABASES	../testeconcrete/settings.py	/^DATABASES = {$/;"	kind:variable	line:76
+DATABASES	../testeconcrete/settings.py	/^DATABASES = {$/;"	kind:variable	line:77
 DEBUG	../testeconcrete/settings.py	/^DEBUG = True$/;"	kind:variable	line:26
+DetalhesUsuario	../usuarios/models.py	/^class DetalhesUsuario(models.Model):$/;"	kind:class	line:12
+DetalhesUsuarioManager	../usuarios/managers.py	/^class DetalhesUsuarioManager(models.Manager):$/;"	kind:class	line:8
 INSTALLED_APPS	../testeconcrete/settings.py	/^INSTALLED_APPS = [$/;"	kind:variable	line:33
-LANGUAGE_CODE	../testeconcrete/settings.py	/^LANGUAGE_CODE = 'en-us'$/;"	kind:variable	line:106
-MIDDLEWARE	../testeconcrete/settings.py	/^MIDDLEWARE = [$/;"	kind:variable	line:42
-ROOT_URLCONF	../testeconcrete/settings.py	/^ROOT_URLCONF = 'testeconcrete.urls'$/;"	kind:variable	line:52
+LANGUAGE_CODE	../testeconcrete/settings.py	/^LANGUAGE_CODE = 'en-us'$/;"	kind:variable	line:107
+MIDDLEWARE	../testeconcrete/settings.py	/^MIDDLEWARE = [$/;"	kind:variable	line:43
+Migration	../usuarios/migrations/0001_initial.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:10
+ROOT_URLCONF	../testeconcrete/settings.py	/^ROOT_URLCONF = 'testeconcrete.urls'$/;"	kind:variable	line:53
 SECRET_KEY	../testeconcrete/settings.py	/^SECRET_KEY = 'pek_1a_f6s_(2+_le#5zw3!z+yf0od1a4!-(u_rh^!(3)$e&(7'$/;"	kind:variable	line:23
-STATIC_URL	../testeconcrete/settings.py	/^STATIC_URL = '\/static\/'$/;"	kind:variable	line:120
-TEMPLATES	../testeconcrete/settings.py	/^TEMPLATES = [$/;"	kind:variable	line:54
-TIME_ZONE	../testeconcrete/settings.py	/^TIME_ZONE = 'UTC'$/;"	kind:variable	line:108
-TesteJWT	../usuarios/tests.py	/^class TesteJWT(TestCase):$/;"	kind:class	line:8
-USE_I18N	../testeconcrete/settings.py	/^USE_I18N = True$/;"	kind:variable	line:110
-USE_L10N	../testeconcrete/settings.py	/^USE_L10N = True$/;"	kind:variable	line:112
-USE_TZ	../testeconcrete/settings.py	/^USE_TZ = True$/;"	kind:variable	line:114
+STATIC_URL	../testeconcrete/settings.py	/^STATIC_URL = '\/static\/'$/;"	kind:variable	line:121
+TEMPLATES	../testeconcrete/settings.py	/^TEMPLATES = [$/;"	kind:variable	line:55
+TIME_ZONE	../testeconcrete/settings.py	/^TIME_ZONE = 'UTC'$/;"	kind:variable	line:109
+Telefone	../usuarios/models.py	/^class Telefone(models.Model):$/;"	kind:class	line:31
+TesteJWT	../usuarios/tests.py	/^class TesteJWT(TestCase):$/;"	kind:class	line:9
+TesteUsuario	../usuarios/tests.py	/^class TesteUsuario(TestCase):$/;"	kind:class	line:22
+USE_I18N	../testeconcrete/settings.py	/^USE_I18N = True$/;"	kind:variable	line:111
+USE_L10N	../testeconcrete/settings.py	/^USE_L10N = True$/;"	kind:variable	line:113
+USE_TZ	../testeconcrete/settings.py	/^USE_TZ = True$/;"	kind:variable	line:115
 UsuariosConfig	../usuarios/apps.py	/^class UsuariosConfig(AppConfig):$/;"	kind:class	line:7
-WSGI_APPLICATION	../testeconcrete/settings.py	/^WSGI_APPLICATION = 'testeconcrete.wsgi.application'$/;"	kind:variable	line:70
+WSGI_APPLICATION	../testeconcrete/settings.py	/^WSGI_APPLICATION = 'testeconcrete.wsgi.application'$/;"	kind:variable	line:71
 __init__.py	../testeconcrete/__init__.py	1;"	kind:file	line:1
 __init__.py	../usuarios/__init__.py	1;"	kind:file	line:1
 __init__.py	../usuarios/migrations/__init__.py	1;"	kind:file	line:1
+adicionarusuario	../usuarios/managers.py	/^    def adicionarusuario(dados):$/;"	kind:member	line:13
 admin.py	../usuarios/admin.py	1;"	kind:file	line:1
 application	../testeconcrete/wsgi.py	/^application = get_wsgi_application()$/;"	kind:variable	line:16
 apps.py	../usuarios/apps.py	1;"	kind:file	line:1
 codificarjwt	../usuarios/jwtutils.py	/^def codificarjwt(payload):$/;"	kind:function	line:8
+ddd	../usuarios/models.py	/^    ddd = models.CharField(max_length=2)$/;"	kind:variable	line:34
 decodificarjwt	../usuarios/jwtutils.py	/^def decodificarjwt(chavejwt):$/;"	kind:function	line:12
+dependencies	../usuarios/migrations/0001_initial.py	/^    dependencies = [$/;"	kind:variable	line:14
+detalhesusuario	../usuarios/models.py	/^    detalhesusuario = models.ForeignKey(DetalhesUsuario)$/;"	kind:variable	line:33
+fields	../usuarios/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:21
+fields	../usuarios/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:30
+guid	../usuarios/models.py	/^    guid = models.CharField(max_length=40)$/;"	kind:variable	line:15
+initial	../usuarios/migrations/0001_initial.py	/^    initial = True$/;"	kind:variable	line:12
+jwttoken	../usuarios/models.py	/^    jwttoken = models.TextField()$/;"	kind:variable	line:16
 jwtutils.py	../usuarios/jwtutils.py	1;"	kind:file	line:1
 manage.py	../manage.py	1;"	kind:file	line:1
+managers.py	../usuarios/managers.py	1;"	kind:file	line:1
 models.py	../usuarios/models.py	1;"	kind:file	line:1
 name	../usuarios/apps.py	/^    name = 'usuarios'$/;"	kind:variable	line:8
+name	../usuarios/migrations/0001_initial.py	/^            name='DetalhesUsuario',$/;"	kind:variable	line:20
+name	../usuarios/migrations/0001_initial.py	/^            name='Telefone',$/;"	kind:variable	line:29
+numero	../usuarios/models.py	/^    numero = models.CharField(max_length=9)$/;"	kind:variable	line:35
+objects	../usuarios/models.py	/^    objects = DetalhesUsuarioManager()$/;"	kind:variable	line:17
+obterporguid	../usuarios/managers.py	/^    def obterporguid(guid):$/;"	kind:member	line:42
+operations	../usuarios/migrations/0001_initial.py	/^    operations = [$/;"	kind:variable	line:18
+save	../usuarios/models.py	/^    def save(self, *args, **kwargs):$/;"	kind:member	line:19
 settings.py	../testeconcrete/settings.py	1;"	kind:file	line:1
-test_codificacao	../usuarios/tests.py	/^    def test_codificacao(self):$/;"	kind:member	line:11
+test_codificacao	../usuarios/tests.py	/^    def test_codificacao(self):$/;"	kind:member	line:12
+test_insercao	../usuarios/tests.py	/^    def test_insercao(self):$/;"	kind:member	line:37
 tests.py	../usuarios/tests.py	1;"	kind:file	line:1
 urlpatterns	../testeconcrete/urls.py	/^urlpatterns = [$/;"	kind:variable	line:19
 urls.py	../testeconcrete/urls.py	1;"	kind:file	line:1
+user	../usuarios/models.py	/^    user = models.OneToOneField(User)$/;"	kind:variable	line:14
+usuario_inserir	../usuarios/tests.py	/^    usuario_inserir = {$/;"	kind:variable	line:25
 views.py	../usuarios/views.py	1;"	kind:file	line:1
 wsgi.py	../testeconcrete/wsgi.py	1;"	kind:file	line:1
