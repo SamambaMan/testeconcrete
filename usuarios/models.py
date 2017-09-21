@@ -4,7 +4,8 @@ from __future__ import unicode_literals
 import hashlib
 from django.db import models
 from django.contrib.auth.models import User
-from .jwtutils import codificarjwt
+from django.utils.timezone import now
+from .jwtutils import codificarjwt, hashjwt
 from .managers import DetalhesUsuarioManager
 
 
@@ -13,6 +14,7 @@ class DetalhesUsuario(models.Model):
     user = models.OneToOneField(User)
     guid = models.CharField(max_length=40)
     jwttoken = models.CharField(max_length=40)
+    ultimamodificacao = models.DateTimeField(default=now)
     objects = DetalhesUsuarioManager()
 
     def save(self, *args, **kwargs):
@@ -22,8 +24,10 @@ class DetalhesUsuario(models.Model):
             self.guid = hashlib.sha1(self.user.username).hexdigest()
 
         if not self.jwttoken:
-            jwtcodificado = codificarjwt({'email': self.user.username})
-            self.jwttoken = hashlib.sha1(jwtcodificado).hexdigest()
+            jwtcodificado = self.gerajwt()
+            self.jwttoken = hashjwt(jwtcodificado)
+
+        self.ultimamodificacao = now()
 
         super(DetalhesUsuario, self).save(*args, **kwargs)
 
@@ -31,6 +35,10 @@ class DetalhesUsuario(models.Model):
         """Verifica se um token jwt informado é igual a
         hash inserida no banco"""
         return hashlib.sha1(jwttoken).hexdigest() == self.jwttoken
+
+    def gerajwt(self):
+        """Gera o JWT deste usuário a partir de seu e-mail"""
+        return codificarjwt({'email': self.user.username})
 
 
 class Telefone(models.Model):

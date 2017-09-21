@@ -27,6 +27,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = []
 
+# Sessao autenticada de 30 minutos
+TEMPO_SESSAO = 30 * 60 
 
 # Application definition
 
