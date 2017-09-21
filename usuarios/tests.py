@@ -3,7 +3,6 @@
 from __future__ import unicode_literals
 from datetime import timedelta
 from django.test import TestCase
-from django.db import IntegrityError
 from django.utils.timezone import now
 from django.conf import settings
 from freezegun import freeze_time

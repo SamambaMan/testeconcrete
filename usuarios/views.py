@@ -19,6 +19,7 @@ def parsepayload(payload):
 def trataerros(metodo):
     """Tratamento de exceptions e retorno de códigos HTTP"""
     def func_wrapper(*args, **kwargs):
+        """Decorator wrapper"""
         try:
             return metodo(*args, **kwargs)
         except ErroAutenticacao as erro:
@@ -33,10 +34,10 @@ def trataerros(metodo):
         except ErroRecursoExistente as erro:
             return Response(serializaerro(erro),
                             status=409)
-        #except Exception as error:
-        #    return Response(serializaerro(
-        #        u"Ocorreu um erro não tratado: " + str(error)),
-        #                    status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except Exception as error:
+            return Response(serializaerro(
+                u"Ocorreu um erro não tratado: " + str(error)),
+                            status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     return func_wrapper
 
@@ -61,7 +62,7 @@ def autenticar(request):
     usuario = DetalhesUsuario.objects.autenticar(payload['email'],
                                                  payload['password'])
 
-    Response(serializarusuario(usuario), status.HTTP_200_OK)
+    return Response(serializarusuario(usuario), status.HTTP_200_OK)
 
 
 @api_view(['GET'])

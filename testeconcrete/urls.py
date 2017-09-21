@@ -17,7 +17,7 @@ from django.conf.urls import url
 from usuarios.views import cadastro, autenticar, obter
 
 urlpatterns = [
-    url(r'^cadastro/$', cadastro),
-    url(r'^autenticar/$', autenticar),
-    url(r'^obter/(?P<guid>[\w\d]+)/$', obter),
+    url(r'^cadastro/$', cadastro, name="cadastro"),
+    url(r'^autenticar/$', autenticar, name="autenticar"),
+    url(r'^obter/(?P<guid>[\w\d]+)/$', obter, name="obter"),
 ]
