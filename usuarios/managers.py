@@ -64,9 +64,11 @@ class DetalhesUsuarioManager(models.Manager):
         try:
             usuario = DetalhesUsuario.objects.get(jwttoken=hashjwt(token))
         except:
+            print("nao encontrei por token")
             raise ErroAutenticacao(ERRO_MENSAGENS['erroautenticacao'])
 
         if usuario.guid != guid:
+            print("guid diferente")
             raise ErroAutenticacao(ERRO_MENSAGENS['erroautenticacao'])
 
         diferenca = now() - usuario.user.last_login
