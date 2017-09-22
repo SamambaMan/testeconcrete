@@ -35,6 +35,7 @@ def trataerros(metodo):
             return Response(serializaerro(erro),
                             status=409)
         except Exception as error:
+            print(error)
             return Response(serializaerro(
                 u"Ocorreu um erro não tratado: " + str(error)),
                             status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -72,6 +73,12 @@ def obter(request, guid):
     jwttoken = request.META['HTTP_AUTHORIZATION']
 
     jwttoken = jwttoken.split(' ')[1]
+
+    # compatibilizacao python 2/3
+    try:
+        jwttoken = str.encode(jwttoken, 'UTF-8')
+    except:
+        pass
 
     usuario = DetalhesUsuario.objects.obterporguidetoken(guid, jwttoken)
 
