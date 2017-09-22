@@ -25,7 +25,7 @@ SECRET_KEY = 'pek_1a_f6s_(2+_le#5zw3!z+yf0od1a4!-(u_rh^!(3)$e&(7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Sessao autenticada de 30 minutos
 TEMPO_SESSAO = 30 * 60 
