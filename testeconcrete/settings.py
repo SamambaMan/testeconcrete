@@ -125,7 +125,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
-if os.environ["AMBIENTE"] == "heroku":
+if "AMBIENTE" in os.environ and os.environ["AMBIENTE"] == "heroku":
     # Parametros para rodar no heroku
     DATABASES = {
         'default': dj_database_url.config()
