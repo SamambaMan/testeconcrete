@@ -1,6 +1,8 @@
 Teste Concrete Solutions
 ============
-Aplicação para o teste Concrete Solutions
+Aplicação para o teste Concrete Solutions:
+
+<a href="https://github.com/concretesolutions/desafio-python/">https://github.com/concretesolutions/desafio-python/</a>
 
 ## Instruções:
 
@@ -8,6 +10,9 @@ Aplicação para o teste Concrete Solutions
 ```
         mkvirtualenv testeconcrete
 ```
+
+A aplicação foi desenvolvida com python 2.7.12, mas foi testada pela ferramenta de Integração Contínua também com 3.5 e roda no ambiente de produção Heroku com 3.5.
+
 2.  Para ativar no virtualenv criado, caso necessário:
 ```
         workon testeconcrete
@@ -22,7 +27,7 @@ Aplicação para o teste Concrete Solutions
 ```
         ./manage.py check
 ```
-5.  Rodando as migrations iniciais e gerando a base de dados padrão:
+5.  Rodando as migrations iniciais e gerando a base de dados padrão(SQLite):
 ```
         ./manage.py migrate
 ```
@@ -40,9 +45,32 @@ Aplicação para o teste Concrete Solutions
 ```
         pep8 .
 ```
+4.  Endereços:
+
+O repositório online se encontra em:
+
+<a href="https://concreteteste.herokuapp.com/" >https://concreteteste.herokuapp.com/</a>
+
+O endereço da integração contínua rodando os testes unitários da aplicação:
+
+<a href="https://travis-ci.org/SamambaMan/testeconcrete" >https://travis-ci.org/SamambaMan/testeconcrete</a>
 
 ## Métodos
 
         POST - /cadastro/     - Cadastro de Usuários
         POST - /autenticar/   - Método de Login
         GET  - /obter/(guid)/ - Ler dados de Usuário
+
+## Utilização
+
+A aplicação utiliza JWT para autenticação da obtenção de dados de usuário.
+
+Para a execução do método de obtenção, ex:
+    
+    /obter/(guid, char(40))/
+
+Deve ser passado no HTTP Header:
+    
+    "Authorization: Bearer (JWT Token)"
+
+A aplicação utiliza como banco de dados local o SQLite, porém, o Heroku não suporta banco de dados no disco efêmero. Então no ambiente de produção estou utilizando Postgresql.
