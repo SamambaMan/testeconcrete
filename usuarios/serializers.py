@@ -18,7 +18,7 @@ def serializarusuario(usuario):
     jwttoken = usuario.gerajwt()
 
     try:
-        jwttoken = a.decode('UTF-8')
+        jwttoken = jwttoken.decode('UTF-8')
     except:
         pass
     retorno = {
