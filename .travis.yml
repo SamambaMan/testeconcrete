@@ -6,4 +6,7 @@ install:
   pip install -r requirements.txt;
   python manage.py collectstatic --noinput -n 
 script:
-  coverage run manage.py test 
+  coverage run manage.py test --pattern=tests*
+notifications:
+  email:
+    - felipe.gomes.ferreira@gmail.com
