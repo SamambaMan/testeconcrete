@@ -1,0 +1,41 @@
+# Teste de cadastro de usuário no sistema
+---
+- config:
+  - testset: "Cadastra um usuário na aplicação"
+- test: 
+  - name: 'Criar usuário'
+  - url: '/cadastro/'
+  - method: 'POST'
+  - body: '{
+        "name":"Felipe Ferreira",
+        "email":"felipe.gomes@teste.com",
+        "password":"testepass",
+        "phones":[
+          {
+            "number":"982090909",
+            "ddd":"21"
+          }
+        ]
+  }'
+  - headers: {Content-Type: application/json}
+  - expected_status: [201]
+  - extract_binds:
+    - 'id': {'jsonpath_mini': 'id'}
+    - 'token': {'jsonpath_mini': 'token'}
+- test:
+  - name: 'Autneticar usuário'
+  - url: '/autenticar/'
+  - method: 'POST'
+  - body: '{
+        "email":"felipe.gomes@teste.com",
+        "password":"testepass"
+      }'
+  - headers: {Content-Type: application/json}
+  - expected_status: [200]
+- test:
+  - name: 'Obter usuário'
+  - url: {'template': "/obter/$id/"}
+  - method: 'GET'
+  - headers: {Authorization: [{'template': "Bearer $token"}]}
+  - expected_status: [200]
+  

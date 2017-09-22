@@ -78,7 +78,10 @@ WSGI_APPLICATION = 'testeconcrete.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config()
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
 
@@ -120,3 +123,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+if not DEBUG:
+    # Parametros para rodar no heroku
+    DATABASES = {
+        'default': dj_database_url.config()
+    }
+
+    ALLOWED_HOSTS = ['*']

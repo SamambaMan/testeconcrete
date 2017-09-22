@@ -9,6 +9,7 @@ from django.test.client import RequestFactory
 from django.utils.timezone import now
 from django.conf import settings
 from freezegun import freeze_time
+from .views import obter
 
 
 JSON_CONTENT_TYPE = "application/json"
@@ -144,9 +145,7 @@ class ObterViewTest(APITestCase):
 
     """
 
-    def test_obtencao(self):
-        """teste de obtencao"""
-        from .views import obter
+    def setUp(self):
         response = self.client.post(
             reverse('cadastro'),
             data=self.cadastrar_obter,
@@ -155,35 +154,71 @@ class ObterViewTest(APITestCase):
 
         payload = response.data
 
-        guid = payload['id']
-        token = payload['token']
+        self.guid = payload['id']
+        self.token = payload['token']
 
-        # tenta simplesmente obter, considerando o usuario ja logado
-        # no cadastro
-        # não gostei desse teste, necessário um teste não viciado
-        # usando curl ou interface remota
-        request = RequestFactory().get(reverse('obter', kwargs={"guid": guid}))
-        request.META['HTTP_AUTHORIZATION'] = "Bearer {0}".format(token)
-        response = obter(request, guid)
+    def test_obtencao(self):
+        """teste de obtencao"""
+
+        # Teste utilizando request factory
+        request = RequestFactory().get(reverse('obter',
+                                               kwargs={"guid": self.guid}))
+        request.META['HTTP_AUTHORIZATION'] = "Bearer {0}".format(self.token)
+        response = obter(request, self.guid)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        # testa token invalido
-        request = RequestFactory().get(reverse('obter', kwargs={"guid": guid}))
+        # Testa utilizando o método do próprio método get do Client
+        # Repete o teste acima de forma melhorada
+        response = self.client.get(
+            reverse('obter', kwargs={"guid": self.guid}),
+            HTTP_AUTHORIZATION="Bearer {0}".format(self.token))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_token_invalido(self):
+        """teste de token invalido"""
+
+        request = RequestFactory().get(reverse('obter',
+                                               kwargs={"guid": self.guid}))
         request.META['HTTP_AUTHORIZATION'] = "Bearer {0}".format("sonserina")
-        response = obter(request, guid)
+        response = obter(request, self.guid)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-        # testa guid invalido
+        # Testa utilizando o método do próprio método get do Client
+        # Repete o teste acima de forma melhorada
+        response = self.client.get(
+            reverse('obter', kwargs={"guid": self.guid}),
+            HTTP_AUTHORIZATION="Bearer {0}".format("corvinal"))
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_guid_invalido(self):
+        """ testa guid invalido """
         request = RequestFactory().get(reverse('obter',
                                                kwargs={"guid": "corvinal"}))
-        request.META['HTTP_AUTHORIZATION'] = "Bearer {0}".format(token)
+        request.META['HTTP_AUTHORIZATION'] = "Bearer {0}".format(self.token)
         response = obter(request, "corvinal")
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-        # testa obtencao de um token com hora adiantada e sessao expirada
+        # Testa utilizando o método do próprio método get do Client
+        # Repete o teste acima de forma melhorada
+        response = self.client.get(
+            reverse('obter', kwargs={"guid": "lufalufa"}),
+            HTTP_AUTHORIZATION="Bearer {0}".format(self.token))
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_sessao_invalida(self):
+        """ testa obtencao de um token com hora adiantada e sessao expirada """
+
         with freeze_time(now() + timedelta(seconds=settings.TEMPO_SESSAO + 1)):
             request = RequestFactory().get(reverse('obter',
-                                                   kwargs={"guid": guid}))
-            request.META['HTTP_AUTHORIZATION'] = "Bearer {0}".format(token)
-            response = obter(request, guid)
+                                                   kwargs={"guid": self.guid}))
+            request.META['HTTP_AUTHORIZATION'] = "Bearer {0}".format(
+                self.token)
+            response = obter(request, self.guid)
+            self.assertEqual(response.status_code, 440)
+
+            # Testa utilizando o método do próprio método get do Client
+            # Repete o teste acima de forma melhorada
+            response = self.client.get(
+                reverse('obter', kwargs={"guid": self.guid}),
+                HTTP_AUTHORIZATION="Bearer {0}".format(self.token))
             self.assertEqual(response.status_code, 440)
