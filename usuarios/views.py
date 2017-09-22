@@ -79,7 +79,6 @@ def obter(request, guid):
         jwttoken = str.encode(jwttoken, 'UTF-8')
     except:
         pass
-        
     print(jwttoken)
 
     usuario = DetalhesUsuario.objects.obterporguidetoken(guid, jwttoken)
