@@ -22,7 +22,7 @@ def serializarusuario(usuario):
         'created': usuario.user.date_joined.strftime(FDATA),
         'modified': usuario.ultimamodificacao.strftime(FDATA),
         'last_login': usuario.user.last_login.strftime(FDATA),
-        'token': usuario.gerajwt()
+        'token': unicode(usuario.gerajwt())
         }
     phones = []
     for telefone in usuario.telefone_set.all():

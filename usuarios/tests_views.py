@@ -157,14 +157,6 @@ class ObterViewTest(APITestCase):
 
         guid = payload['id']
         token = payload['token']
-        print(token)
-
-        try:
-            token = str.encode(token, 'UTF-8')
-        except:
-            pass
-
-        print(token)
 
         # tenta simplesmente obter, considerando o usuario ja logado
         # no cadastro
