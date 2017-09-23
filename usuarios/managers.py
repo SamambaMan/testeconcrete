@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Model managers da aplicação"""
-from django.db import models, transaction, IntegrityError
+from django.db import models, transaction
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 from django.core.exceptions import ObjectDoesNotExist

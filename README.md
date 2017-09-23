@@ -45,6 +45,17 @@ A aplicação foi desenvolvida com python 2.7.12, mas foi testada pela ferrament
 ```
         pep8 .
 ```
+4.  Para testar utilizando o script com curl, execute o servidor em modo de testes:
+```
+        ./manage.py testserver usuarios
+```
+
+Este modo utiliza o banco de dados em memória.
+
+Depois rode o script de testes com o pytest:
+```
+        pytest pytest -q usuarios/pytest_usuarios.py
+```
 4.  Endereços:
 
 O repositório online se encontra em:
