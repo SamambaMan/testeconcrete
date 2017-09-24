@@ -54,7 +54,7 @@ Este modo utiliza o banco de dados em memória.
 
 Depois rode o script de testes com o pytest:
 ```
-        pytest pytest -q usuarios/pytest_usuarios.py
+        pytest -q usuarios/pytest_usuarios.py
 ```
 4.  Endereços:
 
